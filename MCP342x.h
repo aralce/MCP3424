@@ -74,7 +74,7 @@ public:
 
 MCP342x(uint8_t adresse);
 ~MCP342x();
-void begin(uint8_t setMod = 1);
+bool begin(uint8_t setMod = 1);
 void setConfiguration(byte channel,RESOLUTION resolution,MEASURE_MODE mode,PGA pga);
 void newConversion();
 bool isConversionFinished();

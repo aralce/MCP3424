@@ -37,15 +37,14 @@ MCP342x::~MCP342x()
 
 }
 
-void MCP342x::begin(uint8_t setMod)
+bool MCP342x::begin(uint8_t setMod)
 {
 
 #ifdef ENERGIA
 	Wire.setModule(setMod);
 #endif
 
-	Wire.begin();
-
+	return Wire.begin();
 }
 
 uint8_t MCP342x::getAddress()
