@@ -22,14 +22,12 @@ Contact : batto@hotmail.fr
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "MCP342x.h"
+#include "MCP3424.h"
 
 MCP342x::MCP342x(uint8_t adresse)
 {
-
 	_adresse = 0b1101<<3;
 	_adresse |= adresse&0b111;
-
 }
 
 MCP342x::~MCP342x()
@@ -43,7 +41,6 @@ bool MCP342x::begin(uint8_t setMod)
 #ifdef ENERGIA
 	Wire.setModule(setMod);
 #endif
-
 	return Wire.begin();
 }
 
@@ -53,8 +50,8 @@ uint8_t MCP342x::getAddress()
 }
 uint8_t MCP342x::getConfiguration()
 {
-
-	Wire.requestFrom(_adresse, _resolution==RESOLUTION_18_BITS?4:3);
+    uint8_t bits_to_request = _resolution==RESOLUTION_18_BITS?4:3;
+	Wire.requestFrom(_adresse, bits_to_request);
 	
 	uint8_t i=0;
 
@@ -66,11 +63,6 @@ uint8_t MCP342x::getConfiguration()
 
 void MCP342x::setConfiguration(byte channel,RESOLUTION resolution,MEASURE_MODE mode,PGA pga)
 {
-
-channel&=0b11;
-resolution&=0b11;
-mode&=0b1;
-pga&=0b11;
 	
 uint8_t cfgbyte=0;
  
@@ -92,13 +84,11 @@ Wire.endTransmission();
 
 void MCP342x::newConversion()
 {
-
 	uint8_t cfgbyte=getConfiguration();
 	
 	Wire.beginTransmission(_adresse);
 	Wire.write(cfgbyte|=128);
 	Wire.endTransmission();
-
 }
 
 bool MCP342x::isConversionFinished()

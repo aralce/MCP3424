@@ -33,37 +33,36 @@ Contact : batto@hotmail.fr
 #endif
 
 #include <Wire.h>
-//#include <Math.h>
 
-typedef enum MEASURE_MODE
+typedef enum
 {
 	ONE_SHOT_MODE=0,
 	CONTINUOUS_MODE
-};
+}MEASURE_MODE;
 
-typedef enum RESOLUTION
+typedef enum
 {
 	RESOLUTION_12_BITS=0,
 	RESOLUTION_14_BITS,
 	RESOLUTION_16_BITS,
 	RESOLUTION_18_BITS
-};
+}RESOLUTION;
 
-typedef enum CHANNELS
+typedef enum
 {
 	CH1=0,
 	CH2,
 	CH3,
 	CH4
-};
+}CHANNELS;
 
-typedef enum PGA
+typedef enum 
 {
 	PGA_X1=0,
 	PGA_X2,
 	PGA_X4,
 	PGA_X8
-};
+}PGA;
 
 const uint8_t resolutionConvert[] = {12,14,16,18};
 const uint8_t PGAConvert[] = {1,2,4,8};
