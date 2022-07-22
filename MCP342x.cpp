@@ -146,3 +146,19 @@ int32_t MCP342x::measure()
 
 }
 
+float MCP342x::getMeasuredVoltage()
+{
+    int32_t rawValue = measure();
+    switch(_resolution)
+    {
+        case RESOLUTION_18_BITS:
+            return 15.625e-6*(float)rawValue;
+        case RESOLUTION_16_BITS:
+            return 62.5e-6*(float)rawValue;
+        case RESOLUTION_14_BITS:
+            return 250e-6*(float)rawValue;
+        default: //12_bits
+            return 1e-3*(float)rawValue;
+    }
+}
+

@@ -79,10 +79,11 @@ void setConfiguration(byte channel,RESOLUTION resolution,MEASURE_MODE mode,PGA p
 void newConversion();
 bool isConversionFinished();
 int32_t measure();
+float getMeasuredVoltage();
 void getRawDatas(uint8_t buffer[4]);
 uint8_t getConfiguration();
 uint8_t getAddress();
-	
+
 private:
 
 uint8_t _adresse;
